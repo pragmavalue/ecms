@@ -1,0 +1,39 @@
+<?php
+$this->headTitle('Podgląd artykułu - ' . $articles->getTitle());
+
+$this->pageBreadcrumbs()->setItems([
+            'Home'=>$this->url('home')
+            ]);
+        
+/*
+$form = $this->form;
+ $form->get('author')->setAttributes([
+    'class'=>'form-control', 
+    'placeholder'=>'Author\'s name'
+    ]);
+$form->get('comment')->setAttributes([
+    'class'=>'form-control',
+    'rows'=>6, 
+    'placeholder'=>'Text'
+    ]);
+$form->get('submit')->setAttributes(['class'=>'btn btn-primary']);
+$form->prepare();        
+*/
+?>
+
+<h1>
+    <?= $this->escapeHtml($articles->getTitle()); ?>    
+</h1>
+
+<p>
+    Opublikowany: <?= $this->escapeHtml(date('jS \of F Y', strtotime($articles->getDateCreated()))); ?> 
+    | Autor: <?= $this->escapeHtml($articles->getAutor()); ?> | Tags: <?= $this->escapeHtml($articlesManager->convertTagsToString($articles)); ?>
+</p>
+
+<p>    
+    <?=  print_r($articles->getContent()); ?>
+</p>
+<br><br>
+<hr>
+
+
