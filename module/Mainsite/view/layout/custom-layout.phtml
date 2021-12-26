@@ -1,0 +1,95 @@
+
+<?php echo $this->doctype(); ?>
+
+<html lang="pl">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('Pragmavalue '. $this->translate('Adminstracja'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/favicon.ico'))
+                     	->prependStylesheet($this->basePath() . '/styles/main.css')
+                        ->prependStylesheet($this->basePath() . '/styles/bootstrap.css')
+                
+
+        ?>
+
+        <!-- Scripts -->
+        <?php echo $this->headScript()
+            ->prependFile($this->basePath() . '/scripts/bootstrap.min.js')
+            ->prependFile($this->basePath() . 'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+            ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+          
+        ?>
+
+    </head>
+    <body>
+
+    <div id="menu" class="static">
+         
+        <a href=""><img width="160px" src="" alt="logo"></a> &nbsp;&nbsp;&nbsp;&nbsp;
+        Telefon:  <b>690-277-363</b>&nbsp;&nbsp;&nbsp;
+        <b>Strona administracyjna</b>
+        <div class="menu"> 
+        	<a href="/-/Add">Dodaj stronę</a>&nbsp;&nbsp;&nbsp;
+        	<a href="/-/List">Lista stron</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        	<a href="/-/Edit">Edytuj stronę</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        	<a href="/-/Delete">Usuń stronę</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        	<a href="/../5-informacje/index">O MNIE</a>&nbsp;&nbsp;&nbsp;
+        	<a href="/../6-kontakt/index">KONTAKT</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        	<a href="/../7-b2b/index" style="color: red;">B2B</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+    </div>
+    
+    <div id="wrapper">
+    <div class="content">
+
+        <?php echo $this->content; ?>
+	
+
+    </div>
+    </div>
+
+    <div id="footer">
+	<div id="logo">
+		<img src="/../images/logoft.jpg" alt="Logo" width="160px">
+	</div>
+	<div id="copyright">
+	© 2018 Pragmavalue. All rights reserved.<br>
+	            
+	</div>
+	   
+    <div style="margin: 0 auto; padding:0 ; clear: both; position: relative; text-align: center;>
+
+    <?
+
+    if  (!empty($this->email))
+    {
+        echo $this->email;
+    }
+    
+    else
+    
+    {   
+    ?>    
+       <a href="/../crud/index">Site administration</a>
+    <?   
+    }
+    
+    ?>
+
+
+
+    </div>
+    </div>
+    
+    
+    
+    
+    </body>
+</html>
