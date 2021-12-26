@@ -1,0 +1,179 @@
+<?= $this->doctype() ?>
+
+<html lang="pl">
+    <head>
+        <meta charset="utf-8">
+        <?= $this->headTitle('pragmavalue-cms')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <!-- Le styles -->
+        <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
+                ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
+                ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+
+                ->appendStylesheet($this->basePath('css/main.css'))
+                
+
+        ?>
+
+        <!-- Scripts -->
+        <?= $this->headScript()
+            ->prependFile($this->basePath('js/bootstrap.min.js'))
+
+            ->prependFile($this->basePath('js/jquery-3.1.0.min.js'))
+
+            
+        ?>
+        
+    
+    </head>
+    <body>
+    <header>
+        <div class="site-top">
+        
+        <div class="row">      
+         
+         <div class="col-md-5">
+         <a href="index">
+         <div id="logo" class="col-12"><img width="330" src="<?= $this->basePath('img/logo.jpg');?>"></div>
+         </a>
+          </div>  
+         <div class="col-md-7">
+             <nav class="menu">
+                 <ul>
+                     <li><a href="<?= $this->url('articles', ['action'=>'index']); ?>">HOME</a></li>
+                     <li><a href="<?= $this->url('articles', ['action'=>'view', 'id' => '2']); ?>">O MNIE</a></li>
+                     <li><a href="<?= $this->url('articles', ['action'=>'view', 'id' => '3']); ?>">TECH</a></li>
+                     <li><a href="http://pragmavalue.com/pie/">LOGs</a></li>
+                     <li><a href="<?= $this->url('Blog'); ?>">BLOG</a></li>
+                     <li><a href="http://uchyb.pl">FORUM</a></li>
+                 </ul>
+             </nav>
+
+             </div>
+
+        </div>            
+                
+
+    </div>
+
+        <div class="belka">
+
+                
+
+
+                </div>
+
+
+        </div>
+    
+          <br>
+    </header>
+    
+    <br>
+
+<article>
+    
+<div class="container">
+<?PHP
+    
+    echo $this->content;
+    
+
+?>
+
+ <hr>
+ 
+    <div class="row">
+            <div id="box-1" class="col-md-lg-4"><?= print_r($this->Box1); ?></div>
+            <div id="box-2" class="col-md-lg-4"><?= print_r($this->Box2); ?></div>
+            <div id="box-3" class="col-md-lg-4"><?= print_r($this->Box3); ?></div>
+    </div>
+
+            </div>
+            <hr>
+                
+                <br>
+            <hr>
+
+</article>
+
+
+
+    <footer>
+        
+        <div class="row">
+            
+        <div class="col-md-4">
+            <br>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Chmura Tagów</h3>
+            </div>
+            <div class="panel-body">
+                <?PHP
+                
+                foreach($this->tagCloud as $tagNaam => $frequency) {?>
+                
+                <a href="<?= $this->url('articles', ['action'=>'index'],
+                    ['query'=>['tag'=>$tagNaam]]); ?>">                   
+        
+                    <span style="font-size:<?= $this->escapeHtml(0.9+$frequency*3) ?>em">
+                        <?= $this->escapeHtml($tagNaam); ?>
+                    </span>
+                
+                </a>    
+                    
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <br>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Szybkie linki</h3>
+            </div>
+            <div class="panel-body">
+                <a href="index">index</a><br>
+           
+                <a href="<?= $this->url('articles', ['action'=>'view', 'id' => '2']); ?>">articles/view/2</a><br>
+                <a href="<?= $this->url('articles', ['action'=>'view', 'id' => '3']); ?>">articles/view/3</a><br>
+                
+                <a  href="login">login</a><br>
+                
+                <a class="custom" href="<?= $this->url('articles', ['action'=>'admin']); ?>">articles/admin</a><br>
+            </div>
+        </div>
+            </div>
+
+    <div class="col-md-4"><br>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Statystyki</h3>
+            </div>
+            <div class="panel-body">
+
+                
+                                <p>&nbsp;2020 - <?= date('Y') ?> <a href="https://pragmavalue.com"><img src="<?= $this->basePath('img/pralogo.png');?>"></a> developed.<br>
+                                &nbsp;Framework PHP ZF3 was used.</p>
+                                <p>&nbsp;Statystyki wejść: <?= print_r($this->counter); ?></p>
+            </div>
+        </div>
+
+
+            </div>
+
+</div>
+</footer>
+        </div>
+        <?php
+            $this->inlineScript()->captureStart();
+            echo "
+                $('select.dropdown').change(function(){
+                    location.href = $(this).val();
+                });
+            ";
+            $this->inlineScript()->captureEnd(); ?>
+        <?= $this->inlineScript() ?>
+    </body>
+</html>
