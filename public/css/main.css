@@ -1,0 +1,180 @@
+*
+{
+
+margin: 0;
+padding: 0;
+
+
+}
+
+body
+{
+
+    line-height: 1.4;
+    background-color:#FFFFFF;
+    font-family:Tahoma, Helvetica, sans-serif;
+    font-size:15px;
+    font-color:black;
+    margin:5px;
+    padding: 5px;
+    top: 120px;
+}
+    
+
+.site-top
+{
+
+    width: 100%;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    display: block;
+    background-color: #FFF;
+    height: 100px;
+    margin: 0px auto;
+    padding-left: 1%;
+    text-decoration: none;
+    z-index: 15;
+    border-bottom: solid 2px;
+
+}
+
+ul, ul li {
+    display: block;
+    list-style: none;
+    margin: 9px;
+    padding: 0;
+}
+
+ul li {
+    float: left;
+}
+
+ul a:link, ul a:visited {
+    text-decoration: none;
+    display: block;
+    width: 80px;
+    text-align: center;
+    background-color: #ccc;
+    color: #000;
+    border: 2px outset #ccc;
+    padding: 4px;
+}
+
+ul a:hover {
+    border-style: inset;
+    padding: 7px 3px 3px 7px;
+}
+
+
+.menu 
+{
+    
+    display: block;
+    height: 90px;
+    top: 0px;
+    left: -100px;
+    z-index: 100;
+    margin: 0px auto;
+    width: 700px;
+    padding-left: 15px;
+    text-decoration: none;
+    vertical-align: middle;
+ 
+ 
+}
+
+.menu a
+{
+    font-family: Verdana, Tahoma;
+    font-size: 15px;
+    color: red;
+}
+
+  
+#footer {
+
+    display: block;
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 15px;
+    font-family: sans-serif;
+
+}
+
+#logo
+
+{
+
+    margin-top: 15px;
+    z-index: 11;
+    position: relative;
+
+}
+
+#witaj
+
+{
+
+
+
+}
+
+.belka
+
+{
+
+
+    width: 100%;
+    top: 2px;
+    left: 0px;
+    display: block;
+    background-color: #aaa;
+    height: 100px;
+    margin: 0px auto;
+    padding-left: 1%;
+    text-decoration: none;
+    z-index: -9;
+
+
+}
+
+
+#box-1
+{
+    
+    padding: 5px;
+    margin: 2px;
+    border: 1;
+    width: 27%;
+    font-color: white;
+    background-color: red;
+
+}
+#box-2
+{
+
+    padding: 5px;
+    margin: 2px;
+    border: 1;
+    width: 27%;
+    font-color: white;
+    background-color: red;
+}
+#box-3
+{
+
+    padding: 5px;
+    margin: 2px;
+    border: 1;
+    width: 27%;
+    font-color: white;
+    background-color: red;
+}
+
+article {
+    margin-top: 20px;
+
+}
+
