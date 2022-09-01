@@ -1,0 +1,188 @@
+<?= $this->doctype() ?>
+
+<html lang="pl">
+    <head>
+        <meta charset="utf-8">
+        <?= $this->headTitle('pragmavalue-cms')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <!-- Le styles -->
+        <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
+                ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
+                ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+
+                ->appendStylesheet($this->basePath('css/main.css'))
+                
+
+        ?>
+
+        <!-- Scripts -->
+        <?= $this->headScript()
+            ->prependFile($this->basePath('js/bootstrap.min.js'))
+
+            ->prependFile($this->basePath('js/jquery-3.1.0.min.js'))
+
+            
+        ?>
+   
+    
+    </head>
+    <body>
+    <header>
+        
+
+        <div class="site-top">
+        <div class="phone">
+        &nbsp;&nbsp;Dzisiaj jest&nbsp;<div id="elDate"></div>&nbsp;tel. +48 690-277-363&nbsp;&nbsp;
+        <a href="https://www.linkedin.com/in/maciej-pinkosz-6b3a8813b/">Linkedin</a>
+
+        </div>    
+        <script type="text/javascript">              
+                function lz(i) {
+                    return `${i}`.padStart(2, "0");
+                }
+
+                const elDate = document.querySelector("#elDate")
+                const elTime = document.querySelector("#elTime")
+
+                function showTextTime() {
+
+                    const now = new Date();
+                    const days = ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
+
+                const textDate = `${days[now.getDay()]}`;
+                const textTime = `${lz(now.getHours())}:${lz(now.getMinutes())}:${lz(now.getSeconds())}`;
+
+                    elDate.innerHTML = textDate;
+                    elTime.innerHTML = textTime;
+
+                    window.requestAnimationFrame(showTextTime);
+                    }
+
+                window.requestAnimationFrame(showTextTime);
+        </script>
+        <div class="row">      
+         
+         <div class="col-md-4">
+         <a href="index">
+         <div id="logo" class="col-12"><img width="330" src="<?= $this->basePath('img/logo.jpg');?>"></div>
+         </a>
+          </div>  
+         <div class="col-md-8">
+             <nav class="nav">
+                 <div class="nav-items">
+                     <a href="<?= $this->url('articles', ['action'=>'index']); ?>">HOME</a>
+                     <a href="<?= $this->url('articles', ['action'=>'view', 'id' => '2']); ?>">O MNIE</a>
+                     <a href="<?= $this->url('articles', ['action'=>'view', 'id' => '3']); ?>">TECH</a>
+                     <a href="https://value-pie.org/">LOGs</a>
+                     <a href="<?= $this->url('Blog'); ?>">BLOG</a>
+                     <a href="http://uchyb.pl">FORUM</a>
+                 </div>
+                 <div class="search-box">
+                     <input type="text" placeholder="Czego szukasz?" class="search-input">
+                     <button class="search-btn">🔍</button>
+                 </div>
+             </nav>
+
+
+             </div>
+
+        </div>            
+                
+
+    </div>
+
+        <div class="belka">
+
+                
+
+
+                </div>
+
+
+        </div>
+        
+    </header>
+
+<article>
+    
+<div class="container">
+<?PHP
+    
+    print_r($this->content);
+
+?>
+
+ 
+    
+            </div>
+    <div class="belka"></div>
+                
+                <br>
+
+
+</article>
+
+
+
+    <footer>
+        
+        <div class="row">
+            
+        
+    <div class="col-md-8">
+        <br>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Szybkie linki</h3>
+            </div>
+            <div class="panel-body">
+                <a href="<?= $this->url('articles', ['action'=>'index']); ?>">index</a><br>
+           
+                <a href="<?= $this->url('articles', ['action'=>'view', 'id' => '2']); ?>">o mnie</a><br>
+                <a href="<?= $this->url('articles', ['action'=>'view', 'id' => '3']); ?>">technika</a><br>
+                
+                <a  href="login">login</a><br>
+                
+                <a class="custom" href="<?= $this->url('articles', ['action'=>'admin']); ?>">articles/admin</a><br>
+                <a class="custom" href="<?= $this->url('managment', ['action'=>'admin']); ?>">Managment</a><br>
+            </div>
+        </div>
+            </div>
+
+    <div class="col-md-4"><br>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Statystyki</h3>
+            </div>
+            <div class="panel-body">
+
+                
+                                <p>&nbsp;2020 - <?= date('Y') ?> <a href="https://pragmavalue.com"><img src="<?= $this->basePath('img/pralogo.png');?>"></a> developed.<br>
+                                &nbsp;Framework PHP ZF3 was used.</p>
+                                <p>&nbsp;Statystyki wejść: <?= print_r($this->escapeHtml($this->value)); ?></p>
+            </div>
+        </div>
+
+
+            </div>
+
+</div>
+</footer>
+        </div>
+        <?php
+            $this->inlineScript()->captureStart();
+            echo "
+                $('select.dropdown').change(function(){
+                    location.href = $(this).val();
+                });
+            ";
+            $this->inlineScript()->captureEnd(); ?>
+        <?= $this->inlineScript() ?>
+         <script src="<?= $this->basePath('js/index.js');?>"></script>
+         <script src="<?= $this->basePath('js/script.js')?>"></script>
+    </body>
+</html>
+
+
+
+
