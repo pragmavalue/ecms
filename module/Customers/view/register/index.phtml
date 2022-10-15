@@ -1,0 +1,67 @@
+<?php
+    $form = $this->form;
+    $form->prepare();
+    $form->setAttribute('action', $this->url(NULL, array('controller'=>'Register', 'action' => 'process')));
+?>
+
+<div class="container">
+
+<?php if ($this->error): ?>
+<p class="error">
+Wystąpił błąd podczas parsowania. Szczegóły poniżej.
+</p>
+<?php endif ?>
+
+<?echo $this->form()->openTag($form);?>
+
+    <fieldset>
+    <legend>Rejestracja użytkownika</legend>
+    
+    <div class="control-group">
+        <label class="control-label"><?=$this->formLabel($form->get('name'))?></label>
+        <div class="controls">
+            <?=$this->formElement($form->get('name'))?>
+            <?=$this->formElementErrors($form->get('name'))?>
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <label class="control-label"><?=$this->formLabel($form->get('password'))?>:</label>
+            <div class="controls">
+            <?=$this->formElement($form->get('password'))?>
+            <?=$this->formElementErrors($form->get('password'))?>
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <label class="control-label"><?=$this->formLabel($form->get('confirm_password'))?>:</label>
+        <div class="controls">
+            <?=$this->formElement($form->get('confirm_password'))?>
+            <?=$this->formElementErrors($form->get('confirm_password'))?>
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <label class="control-label"><?=$this->formLabel($form->get('email'));?></label>
+        <div class="controls">
+            <?=$this->formElement($form->get('email'))?>
+            <?=$this->formElementErrors($form->get('email'))?>
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <label class="control-label"></label>
+        <div class="controls">
+            <?=$this->formElement($form->get('submit'))?>
+            <?=$this->formElementErrors($form->get('submit'))?>
+        </div>
+    </div>
+    
+    </fieldset>
+
+<?php echo $this->form()->closeTag() ?>
+
+<br />
+<a href="../crud">Wróć na początek</a>
+
+</div>

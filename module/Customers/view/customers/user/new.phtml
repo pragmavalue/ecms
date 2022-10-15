@@ -1,0 +1,56 @@
+<?php
+$this->headTitle('Dodawanie nowego użytkownika');
+
+$form->get('email')->setAttributes([
+    'class'=>'form-control', 
+    'placeholder'=>'name@example.com'
+    ]);
+
+$form->get('password')->setAttributes([
+    'class'=>'form-control',
+    'placeholder'=>'Wpisz hasło',
+    ]);
+
+$form->get('submit')->setAttributes(['class'=>'btn btn-primary']);
+
+$form->prepare();
+?>
+
+<h1>Dodaj nowego użytkownika</h1>
+
+<p>
+    Proszę wypełnij formularz rejestracyjny i przyciśnij <i>Wyślij</i> przycisk.<br>
+    Formularz wysyła maila do <b>Admina</b>, odpowiedź w ciągu 3 dni.
+</p>
+
+<div class="row">
+    <div class="col-md-6">
+        <?= $this->form()->openTag($form); ?>
+        
+        <div class="form-group">
+            <?= $this->formLabel($form->get('email')); ?>
+            <?= $this->formElement($form->get('email')); ?>
+            <?= $this->formElementErrors($form->get('email')); ?>                  
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('password')); ?>
+            <?= $this->formElement($form->get('password')); ?>
+            <?= $this->formElementErrors($form->get('password')); ?>                  
+        </div>
+       
+        <div>
+        <p class="hint">Zabezpieczenie</p>
+        <?= $this->formElement($form->get('captcha')); ?>
+        <p><?= $this->formElementErrors($form->get('captcha')); ?></p>
+        <p class="hint">Wpisz litery i cyfry, które widzisz na obrazku.</p>
+        </div>
+        <br>  
+        <?= $this->formElement($form->get('csrf')); ?>
+        <?= $this->formElementErrors($form->get('csrf')); ?>
+        <?= $this->formElement($form->get('submit')); ?>
+        
+        <?= $this->form()->closeTag(); ?>
+    </div>    
+</div>   
+

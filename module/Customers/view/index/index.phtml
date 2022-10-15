@@ -1,0 +1,32 @@
+﻿<center>
+<h2>Witaj w module użytkownika!</h2>
+<a href="/crud/login" target="_blank" id="show">Zaloguj</a>
+</center>
+
+	<script>
+	$(function() {
+		$('#show').avgrund({
+			height: 350,
+			holderClass: 'custom',
+			showClose: true,
+			showCloseText: '[x]',
+			onBlurContainer: '.container',
+			template: '<?php
+    $form = $this->form;
+    $form->prepare();
+    $form->setAttribute('action', $this->url(NULL, array('controller' => 'login', 'action' => 'process')));
+?>'
+	<h2>Zaloguj sie</h2><br><br>
+	<?=$this->form()->openTag($form)?>
+	<?=$this->formLabel($form->get('email'))?>
+	<?=$this->formElement($form->get('email'))?>
+	<?=$this->formElementErrors($form->get('email'))?>
+	<?=$this->formLabel($form->get('password'))?>
+	<?=$this->formElement($form->get('password'))?>
+	<?=$this->formElementErrors($form->get('password'))?>
+	<?=$this->formElement($form->get('submit'))?>
+	<?=$this->form()->closeTag()?>
+<br><br>
+		});
+	});
+	</script>

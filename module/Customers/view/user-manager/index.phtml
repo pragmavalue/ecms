@@ -1,0 +1,21 @@
+<h3>Użytkownicy systemu cms</h3>
+<table class="table">
+<tr>
+    <th>Nazwa użytkownika</th>
+    <th>Email</th>
+    <th>Hasło</th>
+    <th>&nbsp;</th>
+</tr>
+
+<? foreach($liver_users as $user): ?>
+<tr>
+    <td><?php echo $this->escapeHtml($user->name);?></td>
+    <td><?php echo $this->escapeHtml($user->email);?></td>
+    <td><?php echo $this->escapeHtml($user->password);?></td>
+    <td>
+        <a href="<?php echo $this->url('crud/user-manager', array('action'=>'edit', 'id' => $user->id));?>">Edycja</a> |
+        <a href="<?php echo $this->url('crud/user-manager', array('action'=>'delete', 'id' => $user->id));?>" onclick="return confirm('JesteĹ› pewien ?')">UsuniÄ™cie</a>
+    </td>
+</tr>
+<? endforeach; ?>
+</table>
