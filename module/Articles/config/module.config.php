@@ -36,7 +36,16 @@ return [
                     ],
                 ],
             ],
-                                             
+        'articles' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/articles[/:action]',
+                    'defaults' => [
+                        'controller'    => Controller\ArticlesController::class,
+                        'action'        => 'contakt',
+                    ],
+                ],
+            ],                               
         ],
     ],
 
@@ -56,8 +65,8 @@ return [
         'controllers' => [
             Controller\ArticlesController::class => [
 
-                ['actions'  => ['index'], 'allow' => '*'],
-                ['actions'  => ['articles','view', 'index'], 'allow' => '+artilces.view'],
+                ['actions'  => ['index','articles','contakt'], 'allow' => '*'],
+                ['actions'  => ['articles','view', 'index', 'edit', 'admin'], 'allow' => '+articles.view'],
 
             ],
             Controller\BlogController::class => [
@@ -92,9 +101,10 @@ return [
         
         'template_map' => [
 
-            'articles/articles/index' => __DIR__ . '/../view/articles/index.phtml',
+            'articles/articles/index'    => __DIR__ . '/../view/articles/index.phtml',
+            'articles/articles/contakt'  => __DIR__ . '/../view/articles/contakt.phtml',
             'articles/partial/paginator' => __DIR__ . '/../view/articles/partial/paginator.phtml',
-            'articles/articles/view' => __DIR__ . '/../view/articles/view.phtml',
+            'articles/articles/view'     => __DIR__ . '/../view/articles/view.phtml',
             
             
     

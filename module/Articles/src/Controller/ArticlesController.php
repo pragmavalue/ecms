@@ -3,9 +3,14 @@ namespace Articles\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Articles\Form\ArticlesForm;
 use Articles\Entity\Articles;
-
+use Articles\Form\ContaktForm;
+use Zend\Form\Element;
+use Zend\Mail;
+use Zend\Mail\Transport\Smtp as SmtpTransport;
+use Zend\Mail\Transport\SmtpOptions;
+use Zend\Mime\Message as MimeMessage;
+use Zend\Mime\Part as MimePart;
 
 /**
  * This is the Post controller class of the Blog Blog. 
@@ -26,12 +31,19 @@ class ArticlesController extends AbstractActionController
     private $articlesManager;
     
     /**
+     * PHP template renderer.
+     * @var Zend\View\Renderer\PhpRenderer 
+     */
+    private $viewRenderer;
+    /**
      * Constructor is used for injecting dependencies into the controller.
      */
-    public function __construct($entityManager, $articlesManager) 
+    public function __construct($entityManager, $articlesManager, $viewRenderer) 
     {
         $this->entityManager = $entityManager;
         $this->articlesManager = $articlesManager;
+        $this->viewRenderer = $viewRenderer;
+
     }
     
     /**
@@ -101,31 +113,11 @@ class ArticlesController extends AbstractActionController
             return;                        
         }        
         
-        // Create the form.
-        //$form = new CommentForm();
-        
-        // Check whether this post is a POST request.
-        if($this->getRequest()->isPost()) {
-            
-            // Get POST data.
-            $data = $this->params()->fromPost();
-            
-            // Fill form with data.
-            $form->setData($data);
-            if($form->isValid()) {
-                                
-                // Get validated form data.
-                $data = $form->getData();
-                
-                // Redirect the user again to "view" page.
-                return $this->redirect()->toRoute('articles', ['action'=>'view', 'id'=>$postId]);
-            }
-        }
-        
         // Render the view template.
         return new ViewModel([
             'articles' => $articles,
             'articlesManager' => $this->articlesManager
+
         ]);
 
     }  
@@ -261,4 +253,84 @@ class ArticlesController extends AbstractActionController
             'user' => $user
         ]);
     } 
+    public function contaktAction()
+    {
+        // Create the form.
+        $form = new ContaktForm();
+        
+        // Check whether this post is a POST request.
+        if($this->getRequest()->isPost()) {
+            
+            // Get POST data.
+            $data = $this->params()->fromPost();
+            
+            // Fill form with data.
+            $form->setData($data);
+
+            if($form->isValid()) {
+                                
+                // Get validated form data.
+                $data = $form->getData();
+                               
+                // Redirect the user again to "view" page.
+                // Send a mail message
+
+                $subject = 'Informacja kontaktowa - pragmavalue.com';
+
+                
+                $title = $data['title'];
+                $autor = $data['author'];
+                $email = $data['email'];
+               
+                $mailcontent = (string) $data['content'];
+                
+                // Produce HTML
+
+                $bodyHtml = $this->viewRenderer->render(realpath('./modules/Articles/view/email/contact-email'),
+                [
+                    'mailcontent' => $mailcontent,
+                    'title'       => $title,
+                    'autor'       => $autor,
+                    'email'       => $email,
+
+                ]);
+                
+
+                $html = new MimePart($bodyHtml);
+                $html->type = "text/html";
+
+                $body = new MimeMessage();
+                $body->addPart($html);
+
+                $mail = new Mail\Message();
+                $mail->setEncoding('UTF-8');
+                $mail->setBody($body);
+                $mail->setFrom($email, $subject);
+                $mail->addTo('admin@pragmavalue.com');
+                $mail->setSubject($subject);
+
+                // Setup SMTP transport
+                $transport = new SmtpTransport();
+                $options   = new SmtpOptions
+                ([
+                  'connection_class'  => 'login',
+                  'connectionConfig' => [
+                        'username' => '***',
+                        'password' => '***',
+                        
+                    ],
+                ]);
+
+                $transport->setOptions($options);
+                $transport->send($mail);
+               
+                return $this->redirect()->toRoute('users', ['action'=>'message', 'id'=>'sent']);  
+
+            }
+
+        }
+        return new ViewModel([
+            'form' => $form
+        ]);
+    }
 }

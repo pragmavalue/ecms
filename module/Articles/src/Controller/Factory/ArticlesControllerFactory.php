@@ -16,9 +16,10 @@ class ArticlesControllerFactory implements FactoryInterface
     {
         $entityManager = $container->get('doctrine.entitymanager.orm_default');
         $articlesManager = $container->get(ArticlesManager::class);
+        $viewRenderer = $container->get('ViewRenderer');
         
         // Instantiate the controller and inject dependencies
-        return new ArticlesController($entityManager, $articlesManager);
+        return new ArticlesController($entityManager, $articlesManager, $viewRenderer);
     }
 }
 
